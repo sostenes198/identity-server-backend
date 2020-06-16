@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Anjoz.Identity.Domain\Anjoz.Identity.Domain.csproj" />
+      <ProjectReference Include="..\Anjoz.Identity.Infrastructure\Anjoz.Identity.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

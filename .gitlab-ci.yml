@@ -1,0 +1,94 @@
+image: mcr.microsoft.com/dotnet/core/sdk:2.1-alpine
+
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - dotnet build
+
+unidade:
+  stage: test
+  script:
+    - dotnet test /p:CollectCoverage=true tests/*.Unit.Tests
+
+integracao:
+  stage: test
+  script:
+    - dotnet test /p:CollectCoverage=true tests/*.Integration.Tests
+
+.template_deploy: &template_deploy
+  stage: deploy
+  image: docker
+  services:
+    - docker:dind
+  before_script:
+    - apk add curl
+  script:
+    - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+    - docker pull $NOME_IMAGEM || true
+    - docker build -t $NOME_IMAGEM --build-arg PORT=80 .
+    - docker push $NOME_IMAGEM
+    - docker tag $NOME_IMAGEM $NOME_IMAGEM:$CI_COMMIT_SHA
+    - docker push $NOME_IMAGEM:$CI_COMMIT_SHA
+    - curl --fail --request POST --url $AZURE_WEBAPP_PRODUCAO_WEBHOOK_URL --data {}
+
+desenvolvimento:
+  <<: *template_deploy
+  except:
+      - master
+      - tags
+  variables:
+    NOME_IMAGEM: $CI_REGISTRY_IMAGE/desenvolvimento
+    WEBHOOK_URL: $AZURE_WEBAPP_DESENVOLVIMENTO_WEBHOOK_URL
+  when: manual
+    
+homologacao:
+  <<: *template_deploy
+  only:
+    - master
+  variables:
+    NOME_IMAGEM: $CI_REGISTRY_IMAGE/homologacao
+    WEBHOOK_URL: $AZURE_WEBAPP_HOMOLOGACAO_WEBHOOK_URL
+  when: manual
+
+homologacao_to_heroku:
+  stage: deploy
+  image: docker
+  services:
+    - docker:dind
+  before_script:
+    - apk update
+    - apk upgrade
+    - apk add nodejs
+    - apk add bash
+    - apk add curl
+    - node --version
+    - curl https://cli-assets.heroku.com/install.sh | sh
+    - heroku --version
+  script:
+    - echo "> pushing to heroku" 
+    - echo -n $HEROKU_API_KEY | docker login --username=$HEROKU_EMAIL --password-stdin $HEROKU_CI
+    - docker build -t $HEROKU_CI/$HEROKU_APP_HML/web .
+    - docker push $HEROKU_CI/$HEROKU_APP_HML/web
+    - heroku container:release web --app=$HEROKU_APP_HML
+  only:
+    - master
+  variables:
+    NOME_IMAGEM: $CI_REGISTRY_IMAGE/homologacao
+    WEBHOOK_URL: $AZURE_WEBAPP_HOMOLOGACAO_WEBHOOK_URL
+  when: manual
+
+producao:
+  <<: *template_deploy
+  only:
+    - tags
+  except:
+    - branches
+  variables:
+    NOME_IMAGEM: $CI_REGISTRY_IMAGE/producao
+    WEBHOOK_URL: $AZURE_WEBAPP_PRODUCAO_WEBHOOK_URL
+  when: manual

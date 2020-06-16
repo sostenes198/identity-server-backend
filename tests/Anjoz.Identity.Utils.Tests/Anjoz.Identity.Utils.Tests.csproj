@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+      <PackageReference Include="Bogus" Version="28.4.1" />
+      <PackageReference Include="FluentAssertions" Version="5.9.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+      <PackageReference Include="Moq" Version="4.13.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Anjoz.Identity.Application\Anjoz.Identity.Application.csproj" />
+      <ProjectReference Include="..\..\src\Anjoz.Identity.Repository\Anjoz.Identity.Repository.csproj" />
+    </ItemGroup>
+
+</Project>

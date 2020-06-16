@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="8.5.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.1" />
+        <PackageReference Include="Scrutor" Version="3.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Recursos\Mensagens.resx">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <Visible>true</Visible>
+        </EmbeddedResource>
+    </ItemGroup>
+
+</Project>

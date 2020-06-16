@@ -1,0 +1,20 @@
+{
+  "alteracoes": [
+    {
+      "versao": "1.0.0",
+      "tabelas_alteradas": [
+        "Todas"
+      ],
+      "descricao": "Criação estrutura banco de dados",
+      "scripts": "Criacao_Banco_Versao_1.0.0.sql"
+    },
+    {
+      "versao": "1.1.0",
+      "tabelas_alteradas": [
+        "usuario"
+      ],
+      "descricao": "Adição Campo login, login_normaliado e codigo_equipe tabela usuário",
+      "scripts": "Adicao_Novos_Campos_Tabela_Usuario_Versao_1.1.0.sql"
+    }
+  ]
+}

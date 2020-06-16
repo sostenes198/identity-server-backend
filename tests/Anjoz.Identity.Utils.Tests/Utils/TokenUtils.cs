@@ -1,0 +1,7 @@
+namespace Anjoz.Identity.Utils.Tests.Utils
+{
+    public class TokenUtils
+    {
+        public const string Token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTb3NvMSIsImVtYWlsIjoic29zbzFAc29zby5jb20iLCJQZXJtaXNzb2VzIjpbIlZBTFVFMSIsIlZBTFVFMiIsIlZBTFVFMyIsIlZBTFVFNCIsIlZBTFVFNSJdLCJuYmYiOjE1Nzg2NzUzNjUsImV4cCI6MjE0NzQ4MzY0NywiaWF0IjoxNTc4Njc1MzY1fQ.MBacRKsbjpwieHledXVhty54y2xtC1kJjwrX1OQSKX41DZoIUG95MY4UGQ9ru6fQ4iqJe80CiQ_j6ENg4NRKYw";
+    }
+}

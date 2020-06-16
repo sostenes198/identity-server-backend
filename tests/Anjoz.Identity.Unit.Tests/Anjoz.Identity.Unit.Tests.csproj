@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+
+        <LangVersion>preview</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
+        <PackageReference Include="xunit" Version="2.4.0" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Anjoz.Identity.Infrastructure\Anjoz.Identity.Infrastructure.csproj" />
+      <ProjectReference Include="..\Anjoz.Identity.Utils.Tests\Anjoz.Identity.Utils.Tests.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Tests" />
+      <Folder Include="Infrastructure\Fixtures" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="appsettings.Tests.json">
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+</Project>
